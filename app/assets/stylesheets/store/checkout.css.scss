@@ -1,0 +1,33 @@
+#checkout{
+  ul#payment-methods{
+    list-style: none;
+  }
+  ol {
+    li{
+      float: left;
+      width: 100px;      
+    }
+    li.current-first, li.current{
+      font-weight:bold;
+      color:yellow;
+    }
+  }
+  
+  ol.progress-steps{
+    background-color: #0E2430;
+    color:white;
+    list-style: none;
+    margin: 1em 0em;
+    li{
+      background-color: #0E2430;  
+      padding: 0.25em 1em;
+      a{
+        color:white
+      }
+    }    
+  }
+  #checkout-summary{
+    margin-top: 1em
+  }
+}
+

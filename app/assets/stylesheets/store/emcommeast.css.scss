@@ -1,0 +1,45 @@
+body{
+  background-color: #EEEEEE;
+  padding: 0;
+}
+
+#header{
+  background: image-url("store/bg.jpg");
+  padding: 1em;
+}
+
+#product-variants ul{
+  list-style: none;
+}
+
+
+#wrapper, #footer{
+  margin: 1em;
+  padding: 0
+}
+#content{
+  margin-left: 1em;
+}
+
+#nav-bar a{
+  color:white;
+}
+
+#header #nav-bar li#search-bar{
+  display:none;
+}
+
+
+.flash.notice {
+      border: 2px solid #336600;
+      background: #D0FFA1;
+      padding: 5px 25px;
+      width: 100%;
+}
+.flash.error {
+      border: 2px solid #990000;
+      padding: 5px 25px;
+      background: #FEAEAE ;
+      width: 100%;
+}
+
