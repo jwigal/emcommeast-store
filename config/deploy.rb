@@ -46,6 +46,13 @@ namespace :deploy do
     end
   end
   
+  desc "deploy the precompiled assets"
+  task :deploy_assets, :except => { :no_release => true } do
+     run_locally("rake assets:clean && rake precompile")
+     upload("public/assets", "#{release_path}/public/assets", :via =>
+:scp, :recursive => true)
+     run_locally("rake assets:clean")
+  end
   
   desc "Restarting passenger with restart.txt"
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -108,6 +115,7 @@ namespace :deploy do
 #    after "deploy:update_code", "deploy:chmod_script_files_in_application"
   
     # after "deploy:update_code", "deploy:migrate_all"
+    after "deploy:update", "deploy:deploy_assets"
     after "deploy:update", "deploy:cleanup" 
   end
   

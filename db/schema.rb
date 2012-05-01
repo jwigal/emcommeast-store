@@ -180,6 +180,16 @@ ActiveRecord::Schema.define(:version => 20120501160852) do
     t.integer "ad_hoc_option_value_id"
   end
 
+  create_table "flexi_shipping_rates", :force => true do |t|
+    t.integer  "shipping_category_id"
+    t.integer  "zone_id"
+    t.decimal  "first_item_price",      :precision => 8, :scale => 2
+    t.decimal  "additional_item_price", :precision => 8, :scale => 2
+    t.integer  "max_items",                                           :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "gateways", :force => true do |t|
     t.string   "type"
     t.string   "name"

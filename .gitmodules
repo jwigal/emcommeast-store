@@ -1,3 +1,6 @@
 [submodule "vendor/extensions/extra-variant"]
 	path = vendor/extensions/extra-variant
 	url = git://github.com/cmer/spree-extra-variant.git
+[submodule "vendor/extensions/spree-flexi-rate-shipping"]
+	path = vendor/extensions/spree-flexi-rate-shipping
+	url = git://github.com/BDQ/spree-flexi-rate-shipping.git
