@@ -115,7 +115,6 @@ namespace :deploy do
 #    after "deploy:update_code", "deploy:chmod_script_files_in_application"
   
     # after "deploy:update_code", "deploy:migrate_all"
-    after "deploy:update", "deploy:deploy_assets"
     after "deploy:update", "deploy:cleanup" 
   end
   
