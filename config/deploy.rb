@@ -105,7 +105,7 @@ namespace :deploy do
     
     after "deploy:update_code", "deploy:copy_configuration_ymls"
     # after "deploy:update_code", "deploy:link_attachments_folder"
-    after "deploy:update_code", "deploy:chmod_script_files_in_application"
+#    after "deploy:update_code", "deploy:chmod_script_files_in_application"
   
     # after "deploy:update_code", "deploy:migrate_all"
     after "deploy:update", "deploy:cleanup" 

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -21,7 +21,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "spree"
+gem "spree", "0.70.4"
 gem 'rmagick'
 gem 'carrierwave'
 gem 'spree_flexi_variants', :git=>'git@github.com:jsqu99/spree_flexi_variants.git',:branch => "spree-0-70-stable"
