@@ -25,6 +25,8 @@ gem "spree", "0.70.4"
 gem 'rmagick'
 gem 'carrierwave'
 gem 'spree_flexi_variants', :git=>'git@github.com:jsqu99/spree_flexi_variants.git',:branch => "spree-0-70-stable"
+gem "spree_social", :git => "https://github.com/spree/spree_social.git", :branch => "0_70_stable"
+gem "spree_paypal_express", :git => "https://github.com/spree/spree_paypal_express.git", :ref => "bea1aa48e0089083546bec4b19565a40e9a50a20"
 gem 'capistrano'
 gem 'capistrano-ext'
 

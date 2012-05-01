@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425172048) do
+ActiveRecord::Schema.define(:version => 20120501160852) do
 
   create_table "activators", :force => true do |t|
     t.string   "description"
@@ -106,6 +106,13 @@ ActiveRecord::Schema.define(:version => 20120425172048) do
 
   add_index "assets", ["viewable_id"], :name => "index_assets_on_viewable_id"
   add_index "assets", ["viewable_type", "type"], :name => "index_assets_on_viewable_type_and_type"
+
+  create_table "authentication_methods", :force => true do |t|
+    t.string   "environment"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "calculators", :force => true do |t|
     t.string   "type"
@@ -303,6 +310,13 @@ ActiveRecord::Schema.define(:version => 20120425172048) do
     t.string   "state"
     t.string   "response_code"
     t.string   "avs_response"
+  end
+
+  create_table "paypal_accounts", :force => true do |t|
+    t.string "email"
+    t.string "payer_id"
+    t.string "payer_country"
+    t.string "payer_status"
   end
 
   create_table "preferences", :force => true do |t|
@@ -590,6 +604,15 @@ ActiveRecord::Schema.define(:version => 20120425172048) do
     t.string   "environment"
     t.string   "analytics_id"
     t.boolean  "active",       :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "nickname"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
