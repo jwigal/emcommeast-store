@@ -34,7 +34,7 @@ set :bundle_without, [:development]
 # set :default_stage, "staging"
 # require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
-require 'airbrake/capistrano'
+# require 'airbrake/capistrano'
 
 #http://www.zorched.net/2008/06/17/capistrano-deploy-with-git-and-passenger/
 namespace :deploy do
@@ -117,6 +117,17 @@ namespace :deploy do
     # after "deploy:update_code", "deploy:migrate_all"
     after "deploy:update", "deploy:cleanup" 
   end
-  
-
 end
+
+namespace :assets do
+	desc "create symlinks from shared resources to the release path"
+	task :symlink_spree, :roles => :app do
+		release_image_dir = "#{release_path}/public/spree/"
+		shared_image_dir = "#{shared_path}/uploaded-files/spree/products/"
+		run "mkdir -p #{release_image_dir}"
+		run "mkdir -p #{shared_image_dir}"
+		run "ln -nfs #{shared_image_dir} #{release_image_dir}"
+	end
+end
+after "deploy:update_code", "assets:symlink_spree" 
+
