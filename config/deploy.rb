@@ -131,8 +131,8 @@ namespace :assets do
   desc "deploy the precompiled assets"
   task :precompile, :except => { :no_release => true } do
     run "echo this is my code running instead"
-    run "cd #{current_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:primary"
-    run "cd #{current_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:nondigest"
+    run "cd #{release_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:primary"
+    run "cd #{release_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:nondigest"
   end
 end
 
