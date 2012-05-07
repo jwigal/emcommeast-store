@@ -135,7 +135,6 @@ namespace :assets do
     run "cd #{current_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:nondigest"
   end
 end
-after "deploy:update_code", "assets:symlink_spree" 
 
 set :asset_env, "RAILS_GROUPS=assets"
 set :assets_prefix, "assets"
@@ -143,6 +142,7 @@ set :assets_role, [:web]
 
 before 'deploy:finalize_update', 'deploy:assets:symlink'
 after 'deploy:update_code', 'deploy:assets:precompile_quick'
+after "deploy:update_code", "assets:symlink_spree" 
 
 namespace :deploy do
   namespace :assets do
