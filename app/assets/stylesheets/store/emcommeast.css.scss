@@ -42,4 +42,13 @@ body{
       background: #FEAEAE ;
       width: 100%;
 }
-
+div.container{
+  -moz-box-shadow: 3px 3px 3px #666;
+  -webkit-box-shadow: 3px 3px 3px #666;
+  box-shadow: 3px 3px 3px #666;
+  border: 1px solid black;
+  background-color:white;
+  header#header nav#top-nav-bar{
+	  width: 100%;
+  }
+}
