@@ -9,6 +9,14 @@ GIT
       rmagick
       spree_core (~> 1.0.0)
 
+GIT
+  remote: https://github.com/spree/spree_paypal_express.git
+  revision: 0497b14c798a886673dc4ae0b833e2a01a778555
+  branch: 1-0-stable
+  specs:
+    spree_paypal_express (1.1.0)
+      spree_core (>= 1.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -241,5 +249,6 @@ DEPENDENCIES
   sass-rails (~> 3.1.5)
   spree (~> 1.0)
   spree_flexi_variants!
+  spree_paypal_express!
   sqlite3
   uglifier (>= 1.0.3)

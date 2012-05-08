@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508023558) do
+ActiveRecord::Schema.define(:version => 20120508134214) do
 
   create_table "product_customization_types_products", :id => false, :force => true do |t|
     t.integer "product_customization_type_id"
@@ -315,6 +315,13 @@ ActiveRecord::Schema.define(:version => 20120508023558) do
     t.string   "state"
     t.string   "response_code"
     t.string   "avs_response"
+  end
+
+  create_table "spree_paypal_accounts", :force => true do |t|
+    t.string "email"
+    t.string "payer_id"
+    t.string "payer_country"
+    t.string "payer_status"
   end
 
   create_table "spree_pending_promotions", :force => true do |t|
