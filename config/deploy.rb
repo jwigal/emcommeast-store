@@ -111,10 +111,6 @@ namespace :deploy do
     end
     
     after "deploy:update_code", "deploy:copy_configuration_ymls"
-    # after "deploy:update_code", "deploy:link_attachments_folder"
-#    after "deploy:update_code", "deploy:chmod_script_files_in_application"
-  
-    # after "deploy:update_code", "deploy:migrate_all"
     after "deploy:update", "deploy:cleanup" 
   end
 end
@@ -140,10 +136,24 @@ set :asset_env, "RAILS_GROUPS=assets"
 set :assets_prefix, "assets"
 set :assets_role, [:web]
 
-before 'deploy:finalize_update', 'deploy:assets:symlink'
-after 'deploy:update_code', 'deploy:assets:precompile_quick'
-after "deploy:update_code", "assets:symlink_spree" 
+namespace :assets do
+  task :symlink_compile_spree, :roles => [:web], :except => { :no_release => true } do
+    run "mkdir -p #{latest_release}/public"
+    run "mkdir -p #{shared_path}/assets"
+    run "ln -s #{shared_path}/assets #{release_path}/public/assets"
+		shared_image_dir = "#{shared_path}/uploaded-files/spree"
+    run "mkdir -p #{shared_image_dir}"
+    run "rm -rf #{release_path}/public/spree"
+    run "ln -s #{shared_image_dir} #{release_path}/public/spree"
+    run "cd #{release_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:primary"
+    run "cd #{release_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:nondigest"
+  end
+end
 
+after 'deploy:update_code', 'assets:symlink_compile_spree'
+
+
+=begin
 namespace :deploy do
   namespace :assets do
     desc <<-DESC
@@ -174,8 +184,8 @@ namespace :deploy do
         set :asset_env, "RAILS_GROUPS=assets"
     DESC
     task :precompile_quick, :roles => assets_role, :except => { :no_release => true } do
-      run "cd #{current_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:primary"
-      run "cd #{current_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:nondigest"
+      run "cd #{release_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:primary"
+      run "cd #{release_path} ; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile:nondigest"
     end
 
     desc <<-DESC
@@ -194,4 +204,4 @@ namespace :deploy do
     end
   end
 end
-
+=end
