@@ -5,7 +5,8 @@ body{
 
 #header{
   background: #102634 url(/assets/store/bg.jpg);
-  padding: 1em;
+  padding: 2em;
+  margin: 0;
 }
 
 #product-variants ul{
@@ -16,9 +17,6 @@ body{
 #wrapper, #footer{
   margin: 1em;
   padding: 0
-}
-#content{
-  margin-left: 1em;
 }
 
 #nav-bar a{
@@ -46,6 +44,7 @@ body{
       width: 100%;
 }
 div.container{
+  padding: 1em;
   -moz-box-shadow: 3px 3px 3px #666;
   -webkit-box-shadow: 3px 3px 3px #666;
   box-shadow: 3px 3px 3px #666;
@@ -53,5 +52,11 @@ div.container{
   background-color:white;
   header#header nav#top-nav-bar{
 	  width: 100%;
+  }
+}
+#product-customizations fieldset ol{
+  list-style:none;
+  li label{ 
+    display:none 
   }
 }
