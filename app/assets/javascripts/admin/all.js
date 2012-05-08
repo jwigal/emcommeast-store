@@ -11,3 +11,4 @@
 //= require admin/spree_promo
 
 //= require_tree .
+//= require admin/orders/flexi_configuration

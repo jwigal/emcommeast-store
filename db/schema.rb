@@ -10,17 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120502025612) do
+ActiveRecord::Schema.define(:version => 20120508023558) do
 
-  create_table "coupons", :force => true do |t|
-    t.string   "code"
-    t.string   "description"
-    t.integer  "usage_limit"
-    t.boolean  "combine"
-    t.datetime "expires_at"
-    t.datetime "starts_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "product_customization_types_products", :id => false, :force => true do |t|
+    t.integer "product_customization_type_id"
+    t.integer "product_id"
   end
 
   create_table "spree_activators", :force => true do |t|
@@ -32,6 +26,42 @@ ActiveRecord::Schema.define(:version => 20120502025612) do
     t.string   "name"
     t.string   "event_name"
     t.string   "type"
+    t.integer  "usage_limit"
+    t.string   "match_policy", :default => "all"
+    t.string   "code"
+    t.boolean  "advertise",    :default => false
+    t.string   "path"
+  end
+
+  create_table "spree_ad_hoc_option_types", :force => true do |t|
+    t.integer  "product_id"
+    t.integer  "option_type_id"
+    t.string   "price_modifier_type"
+    t.boolean  "is_required",         :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_ad_hoc_option_values", :force => true do |t|
+    t.integer  "ad_hoc_option_type_id"
+    t.integer  "option_value_id"
+    t.decimal  "price_modifier",        :precision => 8, :scale => 2, :default => 0.0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "position"
+  end
+
+  create_table "spree_ad_hoc_option_values_line_items", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "ad_hoc_option_value_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_ad_hoc_variant_exclusions", :force => true do |t|
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "spree_addresses", :force => true do |t|
@@ -129,6 +159,30 @@ ActiveRecord::Schema.define(:version => 20120502025612) do
     t.datetime "updated_at"
     t.string   "gateway_customer_profile_id"
     t.string   "gateway_payment_profile_id"
+  end
+
+  create_table "spree_customizable_product_options", :force => true do |t|
+    t.integer  "product_customization_type_id"
+    t.integer  "position"
+    t.string   "presentation",                  :null => false
+    t.string   "name",                          :null => false
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_customized_product_options", :force => true do |t|
+    t.integer  "product_customization_id"
+    t.integer  "customizable_product_option_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "customization_image"
+  end
+
+  create_table "spree_excluded_ad_hoc_option_values", :force => true do |t|
+    t.integer "ad_hoc_variant_exclusion_id"
+    t.integer "ad_hoc_option_value_id"
   end
 
   create_table "spree_gateways", :force => true do |t|
@@ -263,12 +317,18 @@ ActiveRecord::Schema.define(:version => 20120502025612) do
     t.string   "avs_response"
   end
 
+  create_table "spree_pending_promotions", :force => true do |t|
+    t.integer "user_id"
+    t.integer "promotion_id"
+  end
+
+  add_index "spree_pending_promotions", ["promotion_id"], :name => "index_spree_pending_promotions_on_promotion_id"
+  add_index "spree_pending_promotions", ["user_id"], :name => "index_spree_pending_promotions_on_user_id"
+
   create_table "spree_preferences", :force => true do |t|
     t.string   "name",       :limit => 100
     t.integer  "owner_id",   :limit => 30
     t.string   "owner_type", :limit => 50
-    t.integer  "group_id"
-    t.string   "group_type", :limit => 50
     t.text     "value",      :limit => 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -277,6 +337,21 @@ ActiveRecord::Schema.define(:version => 20120502025612) do
   end
 
   add_index "spree_preferences", ["key"], :name => "index_spree_preferences_on_key", :unique => true
+
+  create_table "spree_product_customization_types", :force => true do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_product_customizations", :force => true do |t|
+    t.integer  "line_item_id"
+    t.integer  "product_customization_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "spree_product_groups", :force => true do |t|
     t.string "name"
@@ -339,6 +414,14 @@ ActiveRecord::Schema.define(:version => 20120502025612) do
   add_index "spree_products", ["name"], :name => "index_products_on_name"
   add_index "spree_products", ["permalink"], :name => "index_products_on_permalink"
 
+  create_table "spree_products_promotion_rules", :id => false, :force => true do |t|
+    t.integer "product_id"
+    t.integer "promotion_rule_id"
+  end
+
+  add_index "spree_products_promotion_rules", ["product_id"], :name => "index_products_promotion_rules_on_product_id"
+  add_index "spree_products_promotion_rules", ["promotion_rule_id"], :name => "index_products_promotion_rules_on_promotion_rule_id"
+
   create_table "spree_products_taxons", :id => false, :force => true do |t|
     t.integer "product_id"
     t.integer "taxon_id"
@@ -346,6 +429,38 @@ ActiveRecord::Schema.define(:version => 20120502025612) do
 
   add_index "spree_products_taxons", ["product_id"], :name => "index_products_taxons_on_product_id"
   add_index "spree_products_taxons", ["taxon_id"], :name => "index_products_taxons_on_taxon_id"
+
+  create_table "spree_promotion_action_line_items", :force => true do |t|
+    t.integer "promotion_action_id"
+    t.integer "variant_id"
+    t.integer "quantity",            :default => 1
+  end
+
+  create_table "spree_promotion_actions", :force => true do |t|
+    t.integer "activator_id"
+    t.integer "position"
+    t.string  "type"
+  end
+
+  create_table "spree_promotion_rules", :force => true do |t|
+    t.integer  "activator_id"
+    t.integer  "user_id"
+    t.integer  "product_group_id"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_promotion_rules", ["product_group_id"], :name => "index_promotion_rules_on_product_group_id"
+  add_index "spree_promotion_rules", ["user_id"], :name => "index_promotion_rules_on_user_id"
+
+  create_table "spree_promotion_rules_users", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "promotion_rule_id"
+  end
+
+  add_index "spree_promotion_rules_users", ["promotion_rule_id"], :name => "index_promotion_rules_users_on_promotion_rule_id"
+  add_index "spree_promotion_rules_users", ["user_id"], :name => "index_promotion_rules_users_on_user_id"
 
   create_table "spree_properties", :force => true do |t|
     t.string   "name"
