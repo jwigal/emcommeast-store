@@ -1,9 +1,10 @@
-default_run_options[:pty] = true  # Must be set for the password prompt from git to work
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+# default_run_options[:pty] = true  # Must be set for the password prompt from git to work
+# $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 # 
 # # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
 set :rvm_ruby_string, 'ree'
+set :rvm_type, :system
 
 set :repository, "git@github.com:jwigal/emcommeast-store.git"  # Your clone URL
 set :scm, "git"

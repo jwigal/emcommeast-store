@@ -31,4 +31,5 @@ gem 'spree_flexi_variants', :git => 'https://github.com/jsqu99/spree_flexi_varia
 gem "spree_paypal_express", :git => "https://github.com/spree/spree_paypal_express.git",  :branch => "1-0-stable" 
 gem 'capistrano'
 gem 'capistrano-ext'
+gem "rvm-capistrano"
 

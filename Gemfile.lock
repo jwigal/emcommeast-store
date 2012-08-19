@@ -127,7 +127,7 @@ GEM
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
       net-ssh (>= 2.0.9)
-    net-ssh (2.3.0)
+    net-ssh (2.5.2)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
     nokogiri (1.5.2)
@@ -170,6 +170,8 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     rmagick (2.13.1)
+    rvm-capistrano (1.2.5)
+      capistrano (>= 2.0.0)
     sass (3.1.16)
     sass-rails (3.1.6)
       actionpack (~> 3.1.0)
@@ -246,6 +248,7 @@ DEPENDENCIES
   rails
   rails-dev-tweaks (~> 0.5.1)
   rmagick
+  rvm-capistrano
   sass-rails (~> 3.1.5)
   spree (~> 1.0)
   spree_flexi_variants!
