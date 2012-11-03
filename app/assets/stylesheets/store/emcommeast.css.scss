@@ -68,3 +68,21 @@ div.container{
 #ad_hoc_options{
   dt{ width: 33%}
 }
+
+table#cart-detail, table[data-hook="order_details"] {
+  dl{
+    margin-left: 1em;
+    display:block;
+    width: 100%;
+    dt {
+      font-weight:bold;
+      width: 20%;
+      float:left;
+      clear:both;
+    }
+    dd {
+      width: 79%;
+      float:left;
+    }
+  }
+}

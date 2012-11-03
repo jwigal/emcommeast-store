@@ -32,4 +32,4 @@ gem "spree_paypal_express", :git => "https://github.com/spree/spree_paypal_expre
 gem 'capistrano'
 gem 'capistrano-ext'
 gem "rvm-capistrano"
-
+gem 'spree_static_content', :git => 'git://github.com/spree/spree_static_content.git', :branch => '1-0-stable'

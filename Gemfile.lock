@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/spree/spree_static_content.git
+  revision: f7c1d415b8c0c345bec16ef65e62fd2e07f24572
+  branch: 1-0-stable
+  specs:
+    spree_static_content (1.0.1)
+      spree_auth (~> 1.0.0)
+      spree_core (~> 1.0.0)
+
+GIT
   remote: https://github.com/jsqu99/spree_flexi_variants.git
   revision: db918cd1dc2640fe3c039cd2ed74ccc488587f0e
   branch: spree-1-0-stable
@@ -253,5 +262,6 @@ DEPENDENCIES
   spree (~> 1.0)
   spree_flexi_variants!
   spree_paypal_express!
+  spree_static_content!
   sqlite3
   uglifier (>= 1.0.3)

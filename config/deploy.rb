@@ -3,7 +3,7 @@
 # 
 # # Load RVM's capistrano plugin.    
 require "rvm/capistrano"
-set :rvm_ruby_string, 'ree'
+set :rvm_ruby_string, 'ruby-1.9.3-p194'
 set :rvm_type, :system
 
 set :repository, "git@github.com:jwigal/emcommeast-store.git"  # Your clone URL
